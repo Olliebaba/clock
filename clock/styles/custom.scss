@@ -1,0 +1,116 @@
+// custom.scss
+
+body {
+  background-color: rgb(24,24,24);
+  color: #fff;
+}
+
+header {
+  padding: 1rem;
+}
+
+h1 {
+  padding-bottom: .5rem;
+}
+
+[id="clock-box"] {
+  width: 50vw;
+  width: 60vmin;
+  height: 50vh;
+  height: 60vmin;
+
+  &, &::before, &::after {
+    @include absolutely;
+  }
+
+  &::before, &::after {
+    content: ' ';
+    width: auto;
+    height: 1%;
+    border-left: .25rem solid rgba(255,255,255,.5);
+    border-right: .25rem solid rgba(255,255,255,.5);
+    transform: scale(.85);
+    z-index: -1;
+  }
+
+  &::after {
+    border-left-width: 1rem;
+    transform: rotate(90deg) translate3d(0,0,0) scale(.85);
+  }
+}
+
+// clock styles
+.clock {
+  border-radius: 50%;
+  position: relative;
+  width: 100%;
+  height: auto;
+  padding-top: 100%;
+  margin:0 auto;
+
+  &:before {
+    content: ' ';
+    width: 2%;
+    height: 2%;
+    @include absolutely;
+    background-color: rgba(250,65,23, 0.5);
+    border-radius: 50%;
+  }
+}
+
+
+.minutes-container, .hours-container, .seconds-container {
+  @include absolutely;
+  width: 3rem;
+  height: 3rem;
+}
+
+.hours, .minutes, .seconds {
+  height: 100%;
+  width: 100%;
+  @include absolutely;
+  transform-origin: 50% 50%;
+}
+
+.hours::before, .minutes::before, .seconds::before {
+  content:" ";
+}
+
+.hours::after, .minutes::after, .seconds::after {
+  content: ' ';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 1rem;
+  top: auto;
+  margin: auto;
+  overflow: hidden;
+  background-color: red;
+}
+
+.hours::after {
+  width: 1rem;
+  height: 6rem;
+}
+
+
+.minutes::after {
+  width: .75rem;
+  height: 9rem;
+}
+
+.seconds::after {
+  width: .5rem;
+  height: 13rem;
+}
+
+.hours-container {
+  animation: rotate 43200s infinite linear;
+}
+.minutes-container {
+  transition: transform 0.3s cubic-bezier(.4,2.08,.55,.44);
+}
+.seconds-container {
+  transition: transform 0.2s cubic-bezier(.4,2.08,.55,.44);
+}
